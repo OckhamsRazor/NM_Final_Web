@@ -1,0 +1,89 @@
+{% load static %}
+
+<head>
+  <title>XD</title>
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="screen"
+     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'posts/css/main.css' %}">
+  
+  
+  <script type="text/javascript"
+     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+  </script> 
+  <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+  <script src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="{% static 'posts/js/posts.js' %}"></script>
+</head>
+
+<body>
+<div id="outer">
+  <div id="header">
+    <h1>Message Board</h1>
+  </div>
+  
+  <div id="error">
+    {% if error_msg %}
+      <h2><strong>{{ error_msg }}</strong></h2>
+    {% endif %}
+  </div>
+  
+  <div id="main">
+  
+    <div id="table_container">
+      <table id="post_table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Message</th>
+            <th>Publish Time</th>
+            <th>Cover Img</th>
+            <th>Content Img</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for post in posts %}
+            {% include "posts/_post.html" %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <br class="clear"/>
+  </div>
+  
+  <div id="new_post_container">
+    <form action='{% url "create" %}' method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <p><label for="id_name">Name:</label><input id="id_name" maxlength="30" name="name" type="text" /></p>
+      <p><label for="id_msg">Msg:</label> <input id="id_msg" maxlength="300" name="msg" type="text" /></p>
+      
+      <p><label for="id_publishTime">PublishTime:</label> 
+        <div id="datetimepicker1" class="input-append date">
+          <input id="id_publishTime" name="publishTime" type="text" />
+          <span class="add-on">
+            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+          </span>
+        </div>
+      </p>
+
+      <p>
+        {{ post_form.coverImg.label_tag }}
+        {{ post_form.coverImg }}
+      </p>
+      <p>
+        {{ post_form.contentImg.label_tag }}
+        {{ post_form.contentImg }}
+      </p>
+      
+      <input type="submit" value="Submit" class="submit_button">
+    </form>
+  </div>
+  
+  <input type="button" onclick="QQ()" value="Log out" id="button">
+  
+</div>
+<br class="clear"/>
+</body>

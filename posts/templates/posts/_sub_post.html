@@ -1,0 +1,40 @@
+  
+  <td class="name">
+    <span class="not_editing">{{ post.name }}</span>
+    <span class="editing"></span>
+  </td>
+  
+  <td class="msg">
+    <span class="not_editing">{{ post.msg }}</span>
+    <span class="editing"></span>
+  </td>
+  
+  <td class="pubTime">
+    <span class="not_editing">{{ post.publishTime|date:"Y-m-d H:i:s" }}</span>
+    <span class="editing"></span>
+  </td>
+
+  <td class="coverImg">
+    <span class="not_editing"><a href="{{ post.coverImg.url }}">{{ post.coverImg.name }}</a></span>
+    <span class="editing"></span>
+  </td>
+
+  <td class="contentImg">
+    <span class="not_editing"><a href="{{ post.contentImg.url }}">{{ post.contentImg.name }}</a></span>
+    <span class="editing"></span>
+  </td>
+  
+  <td class="edit">
+
+    <span class="not_editing"><input type="button" onclick="edit({{ post.id }})" value="Edit" class="edit_button"></span>
+    <span class="editing">
+      <input type="button" onclick="done({{ post.id }})" value="Done" class="done_button">
+      <br/>
+      <input type="button" onclick="discard({{ post.id }})" value="Discard" class="discard_button">
+    </span>
+    
+  </td>
+  
+  <td class="delete">
+    <input type="button" onclick="destroy({{ post.id }})" value="Delete" class="delete_button">
+  </td>
